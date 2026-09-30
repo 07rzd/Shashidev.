@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shashi Kumar — Full Stack Developer & Android App Developer portfolio." />
+  <meta name="theme-color" content="#080a0f" />
+  <title>Shashi Kumar | Full Stack Developer & Android App Developer</title>
+  <style>
+    :root{
+      --bg:#080a0f;
+      --bg-soft:#0d1118;
+      --card:rgba(18,22,31,.72);
+      --card-strong:#111620;
+      --text:#f4f7fb;
+      --muted:#9ca7b7;
+      --line:rgba(255,255,255,.09);
+      --accent:#4f8cff;
+      --accent-2:#7c5cff;
+      --accent-soft:rgba(79,140,255,.14);
+      --success:#65d6a0;
+      --max:1160px;
+      --radius:22px;
+      --nav-h:74px;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 78% 8%, rgba(79,140,255,.12), transparent 28rem),
+        radial-gradient(circle at 10% 42%, rgba(124,92,255,.08), transparent 26rem),
+        var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.34;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to bottom,black,transparent 80%);
+    }
+    a{color:inherit;text-decoration:none}
+    button,a{ -webkit-tap-highlight-color:transparent }
+    .container{width:min(var(--max),calc(100% - 40px));margin:auto}
+    .nav{
+      position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(8,10,15,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    }
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-weight:800;letter-spacing:-.03em;font-size:1.08rem}
+    .brand span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:5px}
+    .nav-links a{
+      color:#aeb7c6;font-size:.88rem;padding:9px 11px;border-radius:10px;transition:.25s;
+    }
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.055)}
+    .menu-btn{
+      display:none;background:none;border:1px solid var(--line);color:#fff;
+      width:42px;height:42px;border-radius:12px;font-size:1.2rem;cursor:pointer;
+    }
+    main{padding-top:var(--nav-h)}
+    section{scroll-margin-top:95px}
+    .hero{min-height:calc(100vh - var(--nav-h));display:flex;align-items:center;padding:84px 0 72px}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid var(--line);
+      border-radius:999px;background:rgba(255,255,255,.035);color:#c3ccda;font-size:.78rem;
+      letter-spacing:.05em;text-transform:uppercase;
+    }
+    .dot{width:7px;height:7px;background:var(--success);border-radius:50%;box-shadow:0 0 15px rgba(101,214,160,.7)}
+    h1{font-size:clamp(3.1rem,7vw,6.2rem);line-height:.98;letter-spacing:-.065em;margin:22px 0 22px;max-width:800px}
+    .gradient{background:linear-gradient(100deg,#fff 20%,#a9c9ff 55%,#947cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero h2{font-size:clamp(1.2rem,2.3vw,1.7rem);font-weight:600;color:#d9e0ea;margin-bottom:18px}
+    .hero-copy{font-size:1.05rem;color:var(--muted);max-width:680px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 18px;border-radius:13px;
+      border:1px solid var(--line);font-weight:700;font-size:.9rem;transition:transform .25s,box-shadow .25s,border-color .25s,background .25s;
+    }
+    .btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.18)}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 12px 30px rgba(79,140,255,.18);border-color:transparent}
+    .btn-primary:hover{box-shadow:0 17px 38px rgba(79,140,255,.28)}
+    .btn-secondary{background:rgba(255,255,255,.045)}
+    .btn-portfolio{background:rgba(124,92,255,.10);border-color:rgba(124,92,255,.35)}
+    .hero-visual{position:relative;min-height:430px;display:grid;place-items:center}
+    .orb{
+      position:absolute;width:310px;height:310px;border-radius:50%;
+      background:radial-gradient(circle at 35% 30%,rgba(79,140,255,.34),rgba(124,92,255,.12) 45%,transparent 70%);
+      filter:blur(1px);animation:float 7s ease-in-out infinite;
+    }
+    .code-card{
+      width:min(470px,100%);position:relative;border:1px solid var(--line);border-radius:24px;
+      background:rgba(14,18,26,.76);backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden;
+      transform:rotate(1deg);
+    }
+    .window-bar{height:42px;display:flex;align-items:center;gap:7px;padding:0 16px;border-bottom:1px solid var(--line)}
+    .window-bar i{width:8px;height:8px;border-radius:50%;background:#515a69}
+    .code{padding:25px 27px 28px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.85rem;line-height:2;color:#b7c2d1}
+    .code .kw{color:#8d79ff}.code .fn{color:#6fb1ff}.code .str{color:#75d5ae}.code .cm{color:#667184}
+    .mini-stack{position:absolute;right:-18px;bottom:28px;padding:14px 16px;border:1px solid var(--line);background:rgba(17,22,31,.9);border-radius:16px;box-shadow:var(--shadow);font-size:.78rem;color:#c8d1df}
+    .mini-stack b{display:block;color:#fff;margin-bottom:4px}
+    .section{padding:104px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:40px}
+    .kicker{color:#7eaaff;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;font-weight:800}
+    h3{font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-.045em;margin-top:8px}
+    .section-intro{color:var(--muted);max-width:560px}
+    .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+    .panel{
+      border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:32px;
+      box-shadow:0 15px 50px rgba(0,0,0,.16);
+    }
+    .about-text{font-size:1.1rem;color:#c7cfdb;line-height:1.85}
+    .about-highlight{margin-top:24px;padding:18px;border-radius:16px;background:var(--accent-soft);border:1px solid rgba(79,140,255,.15);color:#dce8ff}
+    .facts{display:grid;gap:12px}
+    .fact{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+    .fact:last-child{border-bottom:0}
+    .fact span:first-child{color:#818d9e}.fact span:last-child{text-align:right;color:#e4e9f0;font-weight:650}
+    .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .skill-card{border:1px solid var(--line);background:var(--card);border-radius:19px;padding:25px;transition:.3s}
+    .skill-card:hover,.project:hover{transform:translateY(-4px);border-color:rgba(79,140,255,.24);box-shadow:var(--shadow)}
+    .skill-card h4{font-size:1rem;margin-bottom:17px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{font-size:.78rem;color:#c3cddd;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+    .chip.learning{color:#b8d0ff;background:rgba(79,140,255,.08);border-color:rgba(79,140,255,.18)}
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .project{
+      position:relative;display:flex;flex-direction:column;border:1px solid var(--line);background:var(--card);
+      border-radius:22px;padding:27px;overflow:hidden;transition:.3s;
+    }
+    .project:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:.8}
+    .project-number{color:#66758b;font-family:monospace;font-size:.76rem}
+    .project h4{font-size:1.3rem;line-height:1.25;margin:13px 0 11px}
+    .project p{color:var(--muted);font-size:.9rem}
+    .features{list-style:none;margin:20px 0 0;display:grid;gap:8px}
+    .features li{font-size:.78rem;color:#bdc7d5;display:flex;gap:8px}
+    .features li:before{content:"↳";color:#77a8ff}
+    .project-footer{margin-top:auto;padding-top:24px;color:#7eaaff;font-size:.78rem}
+    .timeline{position:relative;margin-left:11px;padding-left:35px;border-left:1px solid rgba(255,255,255,.1)}
+    .timeline-item{position:relative;padding-bottom:34px}
+    .timeline-item:last-child{padding-bottom:0}
+    .timeline-item:before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;left:-41px;top:7px;background:var(--accent);box-shadow:0 0 0 6px rgba(79,140,255,.10)}
+    .time{font-size:.75rem;color:#7eaaff;font-weight:800;letter-spacing:.05em}
+    .timeline h4{font-size:1.2rem;margin:6px 0}
+    .timeline p{color:var(--muted);font-size:.9rem;max-width:760px}
+    .edu-grid{display:grid;gap:14px}
+    .edu{display:grid;grid-template-columns:110px 1fr auto;gap:22px;align-items:center;padding:23px 25px;border:1px solid var(--line);background:var(--card);border-radius:18px}
+    .edu-year{color:#7eaaff;font-size:.8rem;font-weight:800}
+    .edu h4{font-size:1.02rem;margin-bottom:3px}.edu p{color:var(--muted);font-size:.85rem}
+    .grade{text-align:right;color:#d9e1eb;font-weight:750;font-size:.85rem}
+    .additional{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .additional div{padding:19px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025);color:#bcc6d4;font-size:.88rem}
+    .interest-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .interest{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:#d2dae5;font-size:.82rem}
+    .contact{
+      padding:65px 0;margin:30px 0 80px;border:1px solid var(--line);border-radius:30px;
+      background:radial-gradient(circle at 90% 20%,rgba(79,140,255,.15),transparent 26rem),var(--card);
+      overflow:hidden;position:relative;
+    }
+    .contact-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:0 48px}
+    .contact h3{max-width:620px}.contact p{color:var(--muted);margin-top:13px;max-width:610px}
+    .contact-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+    footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#6f7b8d;font-size:.78rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:none}
+    @keyframes float{50%{transform:translateY(-16px) scale(1.03)}}
+    @media(max-width:980px){
+      .nav-links{display:none;position:absolute;top:var(--nav-h);left:20px;right:20px;padding:12px;background:rgba(13,17,24,.97);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);flex-direction:column;align-items:stretch}
+      .nav-links.open{display:flex}.nav-links a{padding:12px}.menu-btn{display:block}
+      .hero-grid,.about-grid{grid-template-columns:1fr}.hero{padding-top:70px}.hero-visual{min-height:350px}
+      .skills-grid{grid-template-columns:1fr 1fr}.projects{grid-template-columns:1fr}
+      .contact-inner{flex-direction:column;align-items:flex-start;padding:0 32px}.contact-actions{justify-content:flex-start}
+    }
+    @media(max-width:640px){
+      .container{width:min(var(--max),calc(100% - 28px))}
+      .hero{padding:55px 0 50px}.hero-visual{min-height:290px}.orb{width:230px;height:230px}.mini-stack{right:0}
+      .code{font-size:.72rem;padding:20px}.section{padding:75px 0}.section-head{display:block;margin-bottom:28px}
+      .skills-grid,.additional{grid-template-columns:1fr}.panel{padding:24px}
+      .edu{grid-template-columns:1fr;gap:7px}.grade{text-align:left}
+      .contact{margin-bottom:55px;padding:48px 0}.contact-inner{padding:0 24px}
+      .actions .btn{width:100%}.footer-inner{flex-direction:column}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}.reveal{opacity:1;transform:none}.orb{animation:none}.btn,.project,.skill-card{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#home">SK<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+        <a href="#experience">Experience</a><a href="#education">Education</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><span class="dot"></span> Developer Portfolio</div>
+          <h1>Shashi <span class="gradient">Kumar</span></h1>
+          <h2>Full Stack Developer &amp; Android App Developer</h2>
+          <p class="hero-copy">Building responsive web applications, eCommerce platforms, and Android applications with a focus on performance, usability, and clean user experiences.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">View Projects <span>↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+            <a class="btn btn-portfolio" href="https://07rzd.github.io/editorportfolioshashi/" target="_blank" rel="noopener noreferrer">Video Editing Portfolio ↗</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="orb"></div>
+          <div class="code-card">
+            <div class="window-bar"><i></i><i></i><i></i></div>
+            <div class="code">
+              <div><span class="cm">// building useful digital products</span></div>
+              <div><span class="kw">const</span> developer = <span class="fn">"Shashi Kumar"</span>;</div>
+              <div><span class="kw">const</span> focus = [</div>
+              <div>&nbsp;&nbsp;<span class="str">"Web"</span>, <span class="str">"eCommerce"</span>,</div>
+              <div>&nbsp;&nbsp;<span class="str">"Android"</span>, <span class="str">"UI/UX"</span></div>
+              <div>];</div>
+              <div><span class="kw">return</span> <span class="fn">build</span>(focus);</div>
+            </div>
+          </div>
+          <div class="mini-stack"><b>Stack</b>PHP · MySQL · JS · Android</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">01 — About</div><h3>Building with purpose.</h3></div><p class="section-intro">A practical developer profile focused on responsive applications, eCommerce systems, Android development, and usable interfaces.</p></div>
+        <div class="about-grid">
+          <div class="panel reveal">
+            <p class="about-text">Shashi Kumar is pursuing BCA and has hands-on experience developing responsive web projects, eCommerce platforms, Android applications, and PDF utility tools. His work spans PHP, MySQL, JavaScript, responsive web development, Android application development, and modern UI/UX practices.</p>
+            <div class="about-highlight">Focused on creating clean, responsive, practical digital experiences across web and mobile.</div>
+          </div>
+          <div class="panel reveal">
+            <div class="facts">
+              <div class="fact"><span>Positioning</span><span>Full Stack &amp; Android</span></div>
+              <div class="fact"><span>Education</span><span>BCA · 2024–2027</span></div>
+              <div class="fact"><span>Web</span><span>PHP · MySQL · JavaScript</span></div>
+              <div class="fact"><span>Mobile</span><span>Android App Development</span></div>
+              <div class="fact"><span>Email</span><span>vishwakshashi.9771@gmail.com</span></div>
+              <div class="fact"><span>Phone</span><span>+91 9771757576</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">02 — Skills</div><h3>Tools of the craft.</h3></div><p class="section-intro">Technical skills, development tools, and technologies currently being explored.</p></div>
+        <div class="skills-grid">
+          <div class="skill-card reveal"><h4>Technical Skills</h4><div class="chips">
+            <span class="chip">Full Stack Development</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">Android App Development</span><span class="chip">XML</span><span class="chip">App Publishing &amp; Testing</span><span class="chip">Social Media &amp; Digital Marketing Basics</span>
+          </div></div>
+          <div class="skill-card reveal"><h4>Tools</h4><div class="chips">
+            <span class="chip">VS Code</span><span class="chip">Android Studio</span><span class="chip">C++</span><span class="chip">Kali Linux</span><span class="chip">XAMPP</span><span class="chip">Canva</span><span class="chip">Notepad++</span><span class="chip">Flutter</span>
+          </div></div>
+          <div class="skill-card reveal"><h4>Currently Learning</h4><div class="chips">
+            <span class="chip learning">Python</span><span class="chip learning">React.js</span><span class="chip learning">REST APIs</span><span class="chip learning">Git/GitHub Workflow</span>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">03 — Projects</div><h3>Selected work.</h3></div><p class="section-intro">Project work presented directly from the supplied portfolio information.</p></div>
+        <div class="projects">
+          <article class="project reveal">
+            <div class="project-number">PROJECT / 01</div>
+            <h4>TheKarolBagh – Full Stack eCommerce Website</h4>
+            <p>Developed a complete responsive eCommerce platform using PHP, MySQL, HTML, CSS, and JavaScript.</p>
+            <ul class="features">
+              <li>Dynamic product listings</li><li>Shopping cart &amp; wishlist</li><li>Admin dashboard &amp; order management</li><li>Responsive product pages</li><li>Backend logic &amp; database handling</li><li>Payment integration concepts</li><li>Admin customization</li><li>Mobile/tablet/desktop optimization</li>
+            </ul>
+            <div class="project-footer">PHP · MySQL · HTML · CSS · JavaScript</div>
+          </article>
+          <article class="project reveal">
+            <div class="project-number">PROJECT / 02</div>
+            <h4>HyperX Player – Android Media Player Application</h4>
+            <p>Designed and developed a modern Android media player application with real-world deployment experience.</p>
+            <ul class="features">
+              <li>Local video &amp; music playback</li><li>Online stream playback</li><li>Gesture-based brightness &amp; volume control</li><li>Playback speed control</li><li>Picture-in-Picture mode</li><li>Background playback</li><li>Performance optimization</li><li>Debugging &amp; feature optimization</li><li>Published on Uptodown</li>
+            </ul>
+            <div class="project-footer">Android · Media Playback · Optimization</div>
+          </article>
+          <article class="project reveal">
+            <div class="project-number">PROJECT / 03</div>
+            <h4>PDF Tool Application – Ongoing Project</h4>
+            <p>Currently developing a feature-rich PDF utility application focused on productivity and document management.</p>
+            <ul class="features">
+              <li>PDF merge &amp; split</li><li>PDF compression</li><li>Image-to-PDF conversion</li><li>Document sharing</li><li>Clean mobile interface</li><li>File processing optimization</li><li>Android storage handling</li><li>Modern UI/UX practices</li>
+            </ul>
+            <div class="project-footer">Android · PDF Utilities · Mobile UI/UX</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">04 — Experience</div><h3>Hands-on experience.</h3></div></div>
+        <div class="panel reveal">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="time">NOV 2024 — JAN 2025</div>
+              <h4>Web Developer – Indus Cloud</h4>
+              <p>Designed and developed the complete company website using WordPress. Created product pages, categories, and a smooth shopping flow. Built a fully responsive website for mobile, tablet, and desktop.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">05 — Education</div><h3>Education journey.</h3></div></div>
+        <div class="edu-grid">
+          <div class="edu reveal"><div class="edu-year">2024 — 2027</div><div><h4>BCA</h4><p>Lal Bahadur Shastri P.G. College, Jaipur, Rajasthan</p></div><div class="grade">Pursuing</div></div>
+          <div class="edu reveal"><div class="edu-year">2023 — 2024</div><div><h4>Class XII · CBSE</h4><p>Sarvodaya Bal Vidyalaya Sect-1 Pkt-7 Dwarka, New Delhi</p></div><div class="grade">71%</div></div>
+          <div class="edu reveal"><div class="edu-year">2021 — 2022</div><div><h4>Class X · BSEB</h4><p>High School Darauli, Siwan, Bihar</p></div><div class="grade">56.6%</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="additional">
+      <div class="container">
+        <div class="section-head reveal"><div><div class="kicker">06 — Additional</div><h3>Beyond the core stack.</h3></div></div>
+        <div class="additional">
+          <div class="reveal">Developed multiple responsive web projects using PHP, HTML, CSS, JavaScript, and MySQL.</div>
+          <div class="reveal">Explored social media marketing and online brand promotion strategies.</div>
+          <div class="reveal">Practiced UI/UX optimization for better user experience across devices.</div>
+          <div class="reveal">Worked on eCommerce website customization and admin panel management.</div>
+        </div>
+        <div class="panel reveal" style="margin-top:18px">
+          <div class="kicker">Interests</div>
+          <div class="interest-chips"><span class="interest">Video Editing</span><span class="interest">Traveling</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact container" id="contact">
+      <div class="contact-inner">
+        <div class="reveal">
+          <div class="kicker">07 — Contact</div>
+          <h3>Let's Build Something Useful</h3>
+          <p>Have a project, internship opportunity, or collaboration idea? Feel free to get in touch.</p>
+        </div>
+        <div class="contact-actions reveal">
+          <a class="btn btn-primary" href="mailto:vishwakshashi.9771@gmail.com">Email Me ↗</a>
+          <a class="btn btn-secondary" href="tel:+919771757576">Call Me ↗</a>
+          <a class="btn btn-portfolio" href="https://07rzd.github.io/editorportfolioshashi/" target="_blank" rel="noopener noreferrer">Video Editing Portfolio ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Shashi Kumar. All rights reserved.</span>
+      <span>Full Stack Developer &amp; Android App Developer</span>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const menuBtn = document.getElementById('menuBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      menuBtn.addEventListener('click', function(){
+        const open = navLinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(open));
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menuBtn.textContent = open ? '×' : '☰';
+      });
+
+      navLinks.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          navLinks.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded','false');
+          menuBtn.setAttribute('aria-label','Open menu');
+          menuBtn.textContent='☰';
+        });
+      });
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries, obs){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {threshold:.12});
+        revealItems.forEach(function(el){observer.observe(el);});
+      } else {
+        revealItems.forEach(function(el){el.classList.add('visible');});
+      }
+    })();
+  </script>
+</body>
+</html>
